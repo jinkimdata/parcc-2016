@@ -1,0 +1,98 @@
+
+//- When I want to switch to my server assets, I comment out the second declaration.
+- var datalink = "http://data.baltimoresun.com/news/parcc2016/"
+- var datalink = ""
+
+include includes/data.pug
+
+doctype html
+//if lt IE 7
+	<html class="no-js lt-ie9 lt-ie8 lt-ie7">
+//if IE 7
+	<html class="no-js lt-ie9 lt-ie8">
+//if IE 8
+	<html class="no-js lt-ie9">
+html(class="no-js", lang="en")
+	head
+		//Basic page needs
+		meta(charset="utf-8")
+		title 2016 Maryland PARCC scores | The Baltimore Sun
+		meta(name="description", content="Compare Maryland PARCC scores using this handy table.")
+		meta(name="author", content="Jin Bae Kim") 
+		meta(name="viewport", content="width=device-width, initial-scale=1, maximum-scale=1")
+		link(rel="stylesheet", type="text/css", href="http://fonts.googleapis.com/css?family=Old+Standard+TT|Lato|Montserrat")
+		link(rel="stylesheet", type="text/css", href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css")
+		link(rel="stylesheet", type="text/css", href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css")
+		link(rel="stylesheet", type="text/css", href=datalink + "css/style.css")
+
+		//Facebook Stuff
+		meta(property="og:title", content="2016 Maryland PARCC scores | The Baltimore Sun")
+		meta(property="og:url", content="http://data.baltimoresun.com/news/parcc2016/")
+		meta(property="og:image", content="http://data.baltimoresun.com/news/parcc2016/images/thumb.png")
+		meta(property="og:site_name", content="The Baltimore Sun")
+		meta(property="og:description", content="Compare Maryland PARCC scores using this handy table.")
+		meta(property="fb:app_id", content="310302989040998")
+		//Twitter Stuff
+		meta(name="twitter:card", content="summary")
+		meta(name="twitter:site", content="@baltimoresun")
+		meta(name="twitter:creator", content="@baltsundata")
+		meta(name="twitter:title", content="2016 Maryland PARCC scores | The Baltimore Sun")
+		meta(name="twitter:description", content="Compare Maryland PARCC scores using this handy table.")
+		meta(name="twitter:image", content="http://data.baltimoresun.com/news/parcc2016/images/thumb.png")
+		meta(name="twitter:domain", content="baltimoresun.com")
+
+		include includes/ad-for-header.html
+		
+body 
+	include includes/omniture.html
+
+	.container
+		h1 2016 Maryland PARCC scores
+		.shareButtons
+			span.icon-facebook
+			span.icon-twitter
+		p A student is considered passing the Partnership for Assessment of Readiness for College and Careers (PARCC) if they score a 4 or 5. Use the table below to compare to see how many students passed in 2015 and 2016. 
+		p Disclaimer: Some 2015 statistics had sample sizes too small, so they were rounded down to zero. As such, some 2015 statistics may be slightly lower than its true value. In addition, scores ">=95" were rounded to "95" for sorting purposes.
+		p Use the search function or click on a column to search and sort by county, school or test.
+		p.abbrev Abbreviations guide:
+		p "ELA03" = English Language Arts Grade 3
+		p "MAT03" = Math Grade 3
+		p "ALG" = Algebra
+		p "GEO" = Geometry
+		#leaderboard
+			include includes/ad-for-body.html
+		#parcc
+			table#parccTable.parccTable
+				thead
+					tr
+						//- th
+						th County
+						th School
+						th Test
+						th % passing 2015
+						th % passing 2015 sorting
+						th % passing 2016
+						th % passing 2016 sorting
+				tbody
+					each school, i in data
+						tr.mainRow
+							//- td
+								i.fa.fa-chevron-down
+							td #{school.county}
+							td #{school.school}
+							td #{school.test}
+							td #{school.stat2015}
+							td #{school.sort2015}
+							td #{school.stat2016}
+							td #{school.sort2016}
+			p Source: Maryland State Department of Education
+			a.credit(href="http://www.baltimoresun.com/data" target="_blank") @baltsundata
+
+
+	//Javascript
+	script(src="https://code.jquery.com/jquery-1.12.3.min.js")
+	script(src="http://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js")
+	//- script(src="https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js")
+	script(src=datalink + "js/app.js")
+	//- script(src=datalink + "js/app.min.js")
+

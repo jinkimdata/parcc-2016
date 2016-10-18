@@ -1,0 +1,88 @@
+@import "mixins";
+@import "variables";
+// Sass mixins libraries
+@import "bourbon/bourbon";
+@import "neat/neat";
+// Base styles -- normalizes styles across browsers. 
+// Alter border-sizing styles to prevent issues in P2P HTML stories
+@import "normalize";
+@import "fonts";
+
+body {
+	color: $offblack;
+	font-size: 14px; // body-level font size for "em"-scaled designs
+}
+h1 {
+	font-family: $montserrat;
+}
+.shareButtons {
+	font-size: 2em;
+	span {
+		margin-right: .5em;
+		&:hover {
+			color: $goldenrod;
+			cursor: pointer;
+		}
+	}
+}
+
+p,a {
+	font-family: $lato;
+}
+a {
+	color: $goldenrod;
+	text-decoration: none;
+}
+.container {
+	position: relative;
+	width: 100%;
+	max-width: 800px;
+	margin: 0 auto;
+	margin-top: 70px; // Pushes below topnav
+	@media(max-width: 500px) {
+		padding: 0 .5em;
+	}
+}
+.abbrev {
+	font-weight: 700;
+	margin-top: 2em;
+}
+#parcc {
+	margin-top: 4em;
+}
+#parccTable {	
+	width: 100%;
+	text-align: center;
+	font-size: 1em;
+	thead {
+	}
+	tbody {
+	}
+	th, td {
+		padding: 1em .5em;
+	}
+	.mainRow {
+		&.odd {
+			background-color: lighten($goldenrod, 40);
+		}
+	}
+	i {
+		cursor: pointer
+	}
+	.child {
+		text-align: left;
+	}
+	.child * {
+		background-color: #f1f1f1;
+	}
+}
+#leaderboard {
+	width: 728px;
+	height: 90px;
+	background-color: #222222;
+	margin: 10px auto;
+	text-align: center;
+	@media (max-width: 730px){
+		display: none;
+	}
+}
